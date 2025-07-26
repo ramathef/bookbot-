@@ -1,12 +1,19 @@
 from stats import *
+import sys
 
 def main():
-    book_path = "books/frankenstein.txt"
-    text = get_book_txt(book_path)
-    num_word = word_count(text)
-    count_char = char_count(text)
-    list_of_dict = shorted_dict(count_char)
-    print_report(book_path, num_word, list_of_dict)
+    if len(sys.argv) != 2:
+
+        print("Usage: python3 main.py <path_to_book>", flush = True)
+        sys.exit(1)
+
+    else:   
+        book_path = sys.argv[1]
+        text = get_book_txt(book_path)
+        num_word = word_count(text)
+        count_char = char_count(text)
+        list_of_dict = shorted_dict(count_char)
+        print_report(book_path, num_word, list_of_dict)
 
 def print_report (book_path, num_word, list_of_dict):
     print(f"============= BOOKBOT =============")
@@ -20,10 +27,11 @@ def print_report (book_path, num_word, list_of_dict):
         else:
             print(f"{item["char"]}: {item["num"]}")
 
-
 def get_book_txt(path_to_file):
     with open(path_to_file) as f:
         return f.read()
+
+
 
 main()
 
